@@ -18,7 +18,7 @@ router.get("/:id", validateId, async (req, res, next) => {
   res.status(404).json({ message: "not found" });
 });
 
-router.post("/", validateId, async (req, res, next) => {
+router.post("/", validateCreate, async (req, res, next) => {
   const newContact = await model.addContact(req.body);
   res.status(201).json(newContact);
 });
@@ -32,7 +32,7 @@ router.delete("/:id", validateId, async (req, res, next) => {
   res.status(404).json({ message: "not found" });
 });
 
-router.put("/:id", validateId, async (req, res, next) => {
+router.put("/:id", validateId, validateUpdate, async (req, res, next) => {
   const { id } = req.params;
   const contact = await model.updateContact(id, req.body);
   if (contact) {
