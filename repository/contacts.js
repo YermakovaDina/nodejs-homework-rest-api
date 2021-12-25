@@ -1,28 +1,8 @@
-import Contact from "../model/contact";
+import Contact from "../model/contact.js";
 
-const listContacts = async ({
-  sortBy,
-  sortByDesc,
-  filter,
-  limit = 10,
-  skip = 0,
-}) => {
-  let sortCriteria = null;
+const listContacts = async () => {
   const total = await Contact.find().countDocuments();
-  let result = Contact.find();
-  if (sortBy) {
-    sortCriteria = { [`${sortBy}`]: 1 };
-  }
-  if (sortByDesc) {
-    sortCriteria = { [`${sortByDesc}`]: -1 };
-  }
-  if (filter) {
-    result = result.select(filter.split("|").join(" ")); // 'name age'
-  }
-  result = await result
-    .skip(Number(skip))
-    .limit(Number(limit))
-    .sort(sortCriteria);
+  const result = await Contact.find();
   return { total, contacts: result };
 };
 

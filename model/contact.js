@@ -1,5 +1,5 @@
 import pkg from "mongoose";
-import { MIN_AGE, MAX_AGE } from "../lib/constants";
+// import { MIN_AGE, MAX_AGE } from "../lib/constants";
 const { Schema, model } = pkg;
 
 const contactSchema = new Schema(
@@ -8,12 +8,12 @@ const contactSchema = new Schema(
       type: String,
       required: [true, "Set name for contact"],
     },
-    age: {
-      type: Number,
-      min: MIN_AGE,
-      max: MAX_AGE,
-      default: null,
-    },
+    // age: {
+    //   type: Number,
+    //   min: MIN_AGE,
+    //   max: MAX_AGE,
+    //   default: null,
+    // },
     email: {
       type: String,
     },
@@ -35,16 +35,22 @@ const contactSchema = new Schema(
         return ret;
       },
     },
-    toObject: { virtuals: true },
+    toObject: {
+      virtuals: true,
+      transform: function (doc, ret) {
+        delete ret._id;
+        return ret;
+      },
+    },
   }
 );
 
-contactSchema.virtual("status").get(function () {
-  if (this.age >= 40) {
-    return "old";
-  }
-  return "young";
-});
+// contactSchema.virtual("status").get(function () {
+//   if (this.age >= 40) {
+//     return "old";
+//   }
+//   return "young";
+// });
 
 const Contact = model("contact", contactSchema);
 

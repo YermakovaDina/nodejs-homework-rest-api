@@ -7,7 +7,7 @@ import {
   addContact,
   removeContact,
   updateContact,
-} from "../../../controllers/contacts";
+} from "../../../controllers/contacts/index.js";
 
 import {
   validateCreate,
@@ -15,7 +15,7 @@ import {
   validateId,
   validateUpdateFavorite,
   validateQuery,
-} from "./validation";
+} from "./validation.js";
 
 const router = new Router();
 
