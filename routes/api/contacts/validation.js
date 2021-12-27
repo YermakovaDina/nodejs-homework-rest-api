@@ -1,7 +1,8 @@
+// возможно, validation стоит вынести отдельно в папку middlewares
 import Joi from "joi";
 import pkg from "mongoose";
 import { HttpCode } from "../../../lib/constants.js";
-// в дз нет
+
 // import { MAX_AGE, MIN_AGE } from "../../../lib/constants";
 
 const { Types } = pkg;
