@@ -27,6 +27,19 @@ const updateFavoriteSchema = Joi.object({
   favorite: Joi.bool().required(),
 });
 
+const regLimit = /\d+/;
+
+export const querySchema = Joi.object({
+  limit: Joi.string().pattern(regLimit).optional(),
+  skip: Joi.number().min(0).optional(),
+  sortBy: Joi.string().valid("name", "age", "email").optional(),
+  sortByDesc: Joi.string().valid("name", "age", "email").optional(),
+  filter: Joi.string()
+    // eslint-disable-next-line prefer-regex-literals
+    .pattern(new RegExp("(name|email|age)\\|?(name|email|age)+"))
+    .optional(),
+});
+
 export const validateCreate = async (req, res, next) => {
   try {
     await createSchema.validateAsync(req.body);
@@ -77,26 +90,13 @@ export const validateId = async (req, res, next) => {
   next();
 };
 
-// const regLimit = /\d+/;
-
-// const querySchema = Joi.object({
-//   limit: Joi.string().pattern(regLimit).optional(),
-//   skip: Joi.number().min(0).optional(),
-//   sortBy: Joi.string().valid("name", "age", "email").optional(),
-//   sortByDesc: Joi.string().valid("name", "age", "email").optional(),
-//   filter: Joi.string()
-//     // eslint-disable-next-line prefer-regex-literals
-//     .pattern(new RegExp("(name|email|age)\\|?(name|email|age)+"))
-//     .optional(),
-// });
-
-// export const validateQuery = async (req, res, next) => {
-//   try {
-//     await querySchema.validateAsync(req.query);
-//   } catch (err) {
-//     return res
-//       .status(HttpCode.BAD_REQUEST)
-//       .json({ message: `Field ${err.message.replace(/"/g, "")}` });
-//   }
-//   next();
-// };
+export const validateQuery = async (req, res, next) => {
+  try {
+    await querySchema.validateAsync(req.query);
+  } catch (err) {
+    return res
+      .status(HttpCode.BAD_REQUEST)
+      .json({ message: `Field ${err.message.replace(/"/g, "")}` });
+  }
+  next();
+};
