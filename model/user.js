@@ -1,18 +1,13 @@
 import pkg from "mongoose";
-import bcrypt from "bcryptjs/dist/bcrypt";
-//import { Role } from "../lib/constants";
+import bcrypt from "bcryptjs";
 
 const { Schema, model } = pkg;
 
 const userSchema = new Schema(
   {
-    name: {
-      type: String,
-      default: "Guest",
-    },
     email: {
       type: String,
-      required: [true, "Set email for user"],
+      required: [true, "Email is required"],
       unique: true,
       validate(value) {
         const re = /\S+@\S+\.\S+/;
@@ -21,16 +16,9 @@ const userSchema = new Schema(
     },
     password: {
       type: String,
-      required: [true, "Set password for user"],
+      required: [true, "Password is required"],
     },
-    role: {
-      type: String,
-      enum: {
-        values: Object.values(Role),
-        message: "Role is not allowed",
-      },
-      default: Role.USER,
-    },
+
     token: {
       type: String,
       default: null,
