@@ -3,6 +3,7 @@ import app from "../app";
 import db from "../lib/db";
 
 const PORT = process.env.PORT || 5000;
+//const { DB_HOST, PORT = 5000 } = process.env;
 
 db.then(() => {
   app.listen(PORT, async () => {
