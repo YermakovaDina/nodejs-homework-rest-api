@@ -3,11 +3,11 @@ import app from "../app";
 import db from "../lib/db";
 
 const PORT = process.env.PORT || 5000;
-//const { DB_HOST, PORT = 5000 } = process.env;
 
 db.then(() => {
   app.listen(PORT, async () => {
-    await mkdir(process.evn.UPLOAD_DIR, { recursive: true });
+    const UPLOAD_DIR = process.env.UPLOAD_DIR;
+    await mkdir(UPLOAD_DIR, { recursive: true });
     console.log(`Server running. Use our API on port: ${PORT}`);
   });
 }).catch((err) => {

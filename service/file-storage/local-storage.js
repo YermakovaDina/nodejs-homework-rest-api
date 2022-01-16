@@ -1,13 +1,14 @@
 import path from "path";
 import fs from "fs/promises";
 import Users from "../../repository/users";
+import { rename } from "fs";
 
 class LocalStorage {
   constructor(file, user) {
     this.userId = user.id;
     this.filename = file.filename;
     this.filePath = file.path;
-    this.folderAvatars = proces.env.FOLDER_FOR_AVATARS;
+    this.folderAvatars = process.env.FOLDER_FOR_AVATARS;
   }
   async save() {
     // Папка где будет лежать аватарка физически

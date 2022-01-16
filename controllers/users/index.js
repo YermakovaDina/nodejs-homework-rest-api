@@ -21,7 +21,8 @@ const aggregation = async (req, res, next) => {
 
 const uploadAvatar = async (req, res, next) => {
   const uploadService = new UploadFileService(
-    LocalFileStorage,
+    // LocalFileStorage,
+    CloudFileStorage,
     req.file,
     req.user
   );

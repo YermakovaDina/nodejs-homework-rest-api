@@ -27,6 +27,11 @@ class CloudStorage {
         folder: this.folderAvatars,
       });
 
+    const newIdAvatarCloud = returnedIdAvatarCloud.replace(
+      `${this.folderAvatars}/`,
+      ""
+    );
+
     await Users.updateAvatar(this.userId, avatarUrl, newIdAvatarCloud);
     // Почистить за собой папку uploads
     await this.removeUploadFile(this.filePath);

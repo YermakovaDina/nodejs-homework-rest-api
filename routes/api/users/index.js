@@ -8,6 +8,6 @@ import { Role } from "../../../lib/constants";
 const router = new Router();
 
 router.get("/stats/:id", guard, roleAccess(Role.ADMIN), aggregation);
-router.patch("/avatar", guard, upload.single("avatar"), uploadAvatar);
+router.patch("/public/avatars", guard, upload.single("avatar"), uploadAvatar);
 
 export default router;
