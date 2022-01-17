@@ -19,7 +19,7 @@ import {
 
 const router = new Router();
 
-router.get("/", guard, getContacts);
+router.get("/", [guard, validateQuery], getContacts);
 
 router.get("/:id", [guard, validateId], getContactById);
 
