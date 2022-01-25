@@ -28,6 +28,13 @@ const updateVerify = async (id, status) => {
   );
 };
 
+const verify = async (userId) => {
+  return await User.updateOne(
+    { _id: userId },
+    { verificationToken: null, verify: true }
+  );
+};
+
 const setSubscription = async (id, subscription) => {
   return await User.updateOne({ _id: id }, { subscription });
 };
@@ -43,6 +50,7 @@ export default {
   create,
   updateToken,
   updateVerify,
+  verify,
   setSubscription,
   updateAvatar,
 };

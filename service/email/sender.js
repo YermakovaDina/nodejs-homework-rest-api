@@ -1,4 +1,4 @@
-import sgMail from "sendgrid/mail";
+import sgMail from "@sendgrid/mail";
 import nodemailer from "nodemailer";
 
 class SenderSendgrid {
