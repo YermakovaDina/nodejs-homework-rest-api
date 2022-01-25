@@ -8,6 +8,10 @@ const findByEmail = async (email) => {
   return await User.findOne({ email });
 };
 
+const findByVerifyToken = async (verifyTokenEmail) => {
+  return await User.findOne({ verifyTokenEmail });
+};
+
 const create = async (body) => {
   const user = new User(body);
   return await user.save();
@@ -15,6 +19,13 @@ const create = async (body) => {
 
 const updateToken = async (id, token) => {
   return await User.updateOne({ _id: id }, { token });
+};
+
+const updateVerify = async (id, status) => {
+  return await User.updateOne(
+    { _id: id },
+    { isVerify: status, verifyTokenEmail: null }
+  );
 };
 
 const setSubscription = async (id, subscription) => {
@@ -28,8 +39,10 @@ const updateAvatar = async (userId, avatarUrl, idAvatarCloud = null) => {
 export default {
   findById,
   findByEmail,
+  findByVerifyToken,
   create,
   updateToken,
+  updateVerify,
   setSubscription,
   updateAvatar,
 };
