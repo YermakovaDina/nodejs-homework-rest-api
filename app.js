@@ -25,6 +25,7 @@ app.use((req, res, next) => {
 app.use("/api/auth", authRouter);
 app.use("/api/users", usersRouter);
 app.use("/api/contacts", contactsRouter);
+app.use("/avatars", express.static("public/avatars"));
 
 app.use((req, res) => {
   res

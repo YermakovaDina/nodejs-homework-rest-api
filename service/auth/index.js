@@ -9,15 +9,15 @@ class AuthService {
     return !!user;
   }
   async create(body) {
-    const { id, name, email, subscription, avatarUrl, verifyTokenEmail } =
+    const { id, name, email, subscription, avatarUrl, verificationToken } =
       await Users.create(body);
-    return { id, name, email, subscription, avatarUrl, verifyTokenEmail };
+    return { id, name, email, subscription, avatarUrl, verificationToken };
   }
 
   async getUser(email, password) {
     const user = await Users.findByEmail(email);
     const isValidPassword = await user?.isValidPassword(password);
-    if (!isValidPassword || !user?.isVerify) {
+    if (!isValidPassword || !user?.verify) {
       return null;
     }
     return user;
@@ -36,6 +36,10 @@ class AuthService {
 
   async setSubscription(id, subscription) {
     await Users.setSubscription(id, subscription);
+  }
+
+  async verify(userId) {
+    await Users.verify(userId);
   }
 }
 

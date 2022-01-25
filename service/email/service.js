@@ -1,4 +1,5 @@
 import Mailgen from "mailgen";
+
 class EmailService {
   constructor(env, sender) {
     this.sender = sender;

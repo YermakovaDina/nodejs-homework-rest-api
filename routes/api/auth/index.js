@@ -18,4 +18,9 @@ router.post("/logout", guard, logout);
 router.post("/current", guard, currentUser);
 router.patch("/", guard, validateUpdateSubscription, updateSubscription);
 
+router.patch("/avatars", guard, upload.single("avatar"), uploadAvatar);
+
+router.get("/verify/:verificationToken", verification);
+router.post("/verify", validateResendVerifySchema, repeatVerificationEmail);
+
 export default router;

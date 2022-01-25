@@ -8,6 +8,11 @@ const { Schema, model } = pkg;
 
 const userSchema = new Schema(
   {
+    name: {
+      type: String,
+      default: "Guest",
+    },
+
     email: {
       type: String,
       required: [true, "Email is required"],
@@ -46,13 +51,14 @@ const userSchema = new Schema(
       default: null,
     },
 
-    isVerify: {
+    verify: {
       type: Boolean,
       default: false,
     },
 
-    verifyTokenEmail: {
+    verificationToken: {
       type: String,
+      required: [true, "Verify token is required"],
       default: randomUUID(),
     },
   },
